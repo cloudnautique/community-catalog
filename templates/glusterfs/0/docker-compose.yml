@@ -27,7 +27,7 @@ glusterfs-volume-create:
     - glusterfs-data
   labels:
     io.rancher.container.hostname_override: container_name
-    io.rancher.container.start_once: true
+    io.rancher.container.start_once: 'true'
 
 #
 # WARNING -- DO NOT CHANGE ANYTHING BELOW
@@ -35,12 +35,12 @@ glusterfs-volume-create:
 #
 glusterfs-data:
   image: busybox
-  command: /bin/true
+  command: '/bin/true'
   net: none
   volumes:
     - /var/run
     - /var/lib/glusterd
   labels:
     io.rancher.container.hostname_override: container_name
-    io.rancher.container.start_once: true
+    io.rancher.container.start_once: 'true'
 
