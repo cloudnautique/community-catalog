@@ -13,9 +13,6 @@ drone-agent:
     - "${drone_service}:drone"
   environment:
     DEBUG: "${debug_mode}"
-  entrypoint:
-    - /opt/rancher/scripts/rancher_drone-config_entrypoint.sh
-    - agent
 
 drone-agent-daemon:
   image: rancher/drone:v0.5-dec16-1
@@ -30,8 +27,7 @@ drone-agent-daemon:
     - /var/lib/docker:/var/lib/docker
   volumes_from:
     - drone-agent-data-volume
-  entrypoint:
-    - /opt/rancher/scripts/rancher_drone_entrypoint.sh
+  command:
     - agent
 
 drone-agent-healthcheck:
@@ -42,8 +38,7 @@ drone-agent-healthcheck:
   net: 'container:drone-agent'
   volumes_from:
     - drone-agent-data-volume
-  environment:
-    entrypoint: "/giddyup health"
+  command: "health"
 
 drone-agent-data-volume:
   image: busybox
